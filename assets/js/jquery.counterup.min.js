@@ -1,0 +1,10 @@
+/*!
+ * jquery.counterup.js 2.1.0
+ *
+ * Copyright 2013, Benjamin Intal http://gambit.ph @bfintal
+ * Released under the GPL v2 License
+ *
+ * Amended by Jeremy Paris, Ciro Mattia Gonano and others
+ *
+ * Date: Feb 24, 2017
+ */ !function(t){"use strict";t.fn.counterUp=function(e){var n,a=t.extend({time:400,delay:10,offset:100,beginAt:0,formatter:!1,context:"window",callback:function(){}},e);return this.each(function(){var e=t(this),u={time:t(this).data("counterup-time")||a.time,delay:t(this).data("counterup-delay")||a.delay,offset:t(this).data("counterup-offset")||a.offset,beginAt:t(this).data("counterup-beginat")||a.beginAt,context:t(this).data("counterup-context")||a.context},o=function(){var t=[],o=u.time/u.delay,c=e.attr("data-num")?e.attr("data-num"):e.text(),i=/[0-9]+,[0-9]+/.test(c),r=((c=c.replace(/,/g,"")).split(".")[1]||[]).length;u.beginAt>c&&(u.beginAt=c);var f=/[0-9]+:[0-9]+:[0-9]+/.test(c);if(f){var s=c.split(":"),d=1;for(n=0;s.length>0;)n+=d*parseInt(s.pop(),10),d*=60}for(var l=o;l>=u.beginAt/c*o;l--){var $=parseFloat(c/o*l).toFixed(r);if(f){$=parseInt(n/o*l);var p=parseInt($/3600)%24,h=parseInt($/60)%60,m=parseInt($%60,10);$=(p<10?"0"+p:p)+":"+(h<10?"0"+h:h)+":"+(m<10?"0"+m:m)}if(i)for(;/(\d+)(\d{3})/.test($.toString());)$=$.toString().replace(/(\d+)(\d{3})/,"$1,$2");a.formatter&&($=a.formatter.call(this,$)),t.unshift($)}e.data("counterup-nums",t),e.text(u.beginAt);var g=function(){if(!e.data("counterup-nums")){a.callback.call(this);return}e.html(e.data("counterup-nums").shift()),e.data("counterup-nums").length?setTimeout(e.data("counterup-func"),u.delay):(e.data("counterup-nums",null),e.data("counterup-func",null),a.callback.call(this))};e.data("counterup-func",g),setTimeout(e.data("counterup-func"),u.delay)};e.waypoint(function(t){o(),this.destroy()},{offset:u.offset+"%",context:u.context})})}}(jQuery);
